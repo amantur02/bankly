@@ -18,9 +18,9 @@ class Settings(BaseSettings):
         return v
 
     postgres_async_url: str = (
-        "postgresql+asyncpg://store_visit:store_visit@127.0.0.1:5432/store_visit"
+        "postgresql+asyncpg://bankly:bankly@127.0.0.1:5432/bankly"
     )
-    postgres_url: str = "postgresql://store_visit:store_visit@127.0.0.1:5432/store_visit"
+    postgres_url: str = "postgresql://bankly:bankly@127.0.0.1:5432/bankly"
     SQLALCHEMY_DATABASE_URL: str = postgres_url
 
     base_dir: str = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
