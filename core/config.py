@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     environment: str = DEV
 
     @field_validator("environment")
-    def environment_values(cls, v):
+    def environment_values(self, v):
         if v is None:
             return None
         if v not in [PROD, DEV]:
@@ -43,7 +43,7 @@ class Settings(BaseSettings):
 
     @field_validator("backend_cors_origins")
     def assemble_cors_origins(
-        cls, v: Union[str, List[str]]
+        self, v: Union[str, List[str]]
     ) -> Union[List[str], str]:
         if isinstance(v, str) and not v.startswith("["):
             return [i.strip() for i in v.split(",")]

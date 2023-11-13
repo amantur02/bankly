@@ -1,4 +1,4 @@
-class BanklyVisitHTTPException(Exception):
+class BanklyHTTPException(Exception):
     default_message = "Default HTTP Exception for bankly visit"
     error_code = "UndefinedHTTPError"
     status_code = 400
