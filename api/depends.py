@@ -6,13 +6,9 @@ from starlette import status
 from jose import jwt
 
 from core.config import settings
-from core.constants import JWT_ALGORITHM, INVALID_AUTHENTICATION_CREDENTIALS, PERMISSION_DENIED_MESSAGE
-from exceptions import NotFoundException, StoreVisitHTTPException
+from core.constants import JWT_ALGORITHM, INVALID_AUTHENTICATION_CREDENTIALS
 from resource_access.db_session import AsyncSessionLocal
-from resource_access.repositories.user_repos import UserRepository
 from schemas.auth_schemas import TokenPayload
-from schemas.enums import UserRoleEnum
-from schemas.user_schemas import User
 
 oauth2_schema = OAuth2PasswordBearer(
     tokenUrl=f"{settings.api_path}/auth/login/"

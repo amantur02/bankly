@@ -17,4 +17,14 @@ class User(BaseModel):
     is_deleted: Optional[bool]
 
     class Config:
-        orm_mode = True
+        from_attributes = True
+
+
+class Client(BaseModel):
+    id: Optional[int]
+    user_id: Optional[int]
+    user: Optional[User]
+    address: Optional[str]
+
+    class Config:
+        from_attributes = True

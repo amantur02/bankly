@@ -1,5 +1,7 @@
 import os
-from typing import List, Union
+from typing import List, Union, ClassVar
+
+from pydantic.v1 import validator
 
 from core.constants import DEV, PROD
 from pydantic import field_validator
@@ -9,7 +11,7 @@ from pydantic_settings import BaseSettings
 class Settings(BaseSettings):
     environment: str = DEV
 
-    @field_validator("environment")
+    @validator("environment")
     def environment_values(self, v):
         if v is None:
             return None
@@ -41,7 +43,7 @@ class Settings(BaseSettings):
     # e.g: '["http://localhost", "http://localhost:4200", "http://local.dockertoolbox.tiangolo.com"]'
     backend_cors_origins: List[str] = ["*"]
 
-    @field_validator("backend_cors_origins")
+    @validator("backend_cors_origins")
     def assemble_cors_origins(
         self, v: Union[str, List[str]]
     ) -> Union[List[str], str]:
@@ -51,7 +53,7 @@ class Settings(BaseSettings):
             return v
         raise ValueError(v)
 
-    project_name: str = "StoreVisit"
+    project_name: str = "Bankly"
     default_pagination_limit: int = 20
 
     async_pool_size: int = 20
@@ -61,6 +63,11 @@ class Settings(BaseSettings):
     sync_pool_size: int = 5
     sync_max_overflow: int = 0
     sync_pool_recycle: int = -1
+
+    UNI_URL: ClassVar[str] = "https://api.unisender.com/ru/api/sendEmail"
+    UNI_API_KEY: ClassVar[str] = "6dus9kfttgpknydkp3hciz3khdz5q8fie8qfyfio"
+    UNI_SENDER_NAME: ClassVar[str] = "Aman"
+    UNI_SENDER_EMAIL: ClassVar[str] = "amantur.ubaid@gmail.com"
 
 
 settings = Settings()
